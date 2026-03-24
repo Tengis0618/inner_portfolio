@@ -215,7 +215,7 @@ const Window: React.FC<WindowProps> = (props) => {
                                     backgroundColor: props.windowBarColor,
                                 },
                                 !windowActive && {
-                                    backgroundColor: Colors.darkGray,
+                                    background: 'linear-gradient(to bottom, #BFBFBF 0%, #8A8A8A 50%, #8A8A8A 50%, #8A8A8A 100%)',
                                 }
                             )}
                         >
@@ -371,19 +371,29 @@ const Window: React.FC<WindowProps> = (props) => {
 };
 
 const styles: StyleSheetCSS = {
+    /*
     window: {
         backgroundColor: Colors.lightGray,
         position: 'absolute',
+    },
+    */
+    window: {
+        backgroundColor: '#ECE9D8', // XP window background color
+        position: 'absolute',
+        borderRadius: '8px 8px 0 0', // Rounded top corners like XP
+        overflow: 'hidden',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
     },
     dragHitbox: {
         position: 'absolute',
         width: 'calc(100% - 70px)',
         height: 48,
         zIndex: 10000,
-        top: -8,
-        left: -4,
+        top: 0, //-8
+        left: 0, //-4
         cursor: 'move',
     },
+    /*
     windowBorderOuter: {
         border: `1px solid ${Colors.black}`,
         borderTopColor: colors.lightGray,
@@ -399,14 +409,28 @@ const styles: StyleSheetCSS = {
 
         flexDirection: 'column',
     },
+    */
+    windowBorderOuter: {
+        border: '1px solid #0054E3', // XP blue border
+        borderRadius: '8px 8px 0 0',
+        flex: 1,
+    },
+    windowBorderInner: {
+        border: 'none', // Remove inner border for cleaner XP look
+        flex: 1,
+        padding: 0,
+        flexDirection: 'column',
+        borderRadius: '7px 7px 0 0',
+    },
     resizeHitbox: {
         position: 'absolute',
-        width: 60,
-        height: 60,
-        bottom: -20,
-        right: -20,
+        width: 20, //60
+        height: 20, //60
+        bottom: 0, //-20
+        right: 0, //-20
         cursor: 'nwse-resize',
     },
+    /*
     topBar: {
         backgroundColor: Colors.blue,
         width: '100%',
@@ -441,42 +465,88 @@ const styles: StyleSheetCSS = {
         overflowX: 'hidden',
         backgroundColor: Colors.white,
     },
+    */
+    topBar: {
+        background: 'linear-gradient(to bottom, #2E5BDA 0%, #1941A5 50%, #1941A5 50%, #1941A5 100%)', // XP blue gradient
+        width: '100%',
+        height: 30, // Taller title bar like XP
+        alignItems: 'center',
+        paddingLeft: 8,
+        paddingRight: 4,
+        boxSizing: 'border-box',
+        borderRadius: '7px 7px 0 0',
+        borderBottom: '1px solid #316AC5',
+    },
+    contentOuter: {
+        border: '1px solid #ACA899', // XP content border color
+        borderTop: '1px solid #FFFFFF',
+        borderLeft: '1px solid #FFFFFF',
+        flexGrow: 1,
+        margin: '2px',
+        overflow: 'hidden',
+        backgroundColor: '#FFFFFF',
+    },
+    contentInner: {
+        border: '1px solid #ACA899',
+        borderTop: '1px solid #DFDFDF',
+        borderLeft: '1px solid #DFDFDF',
+        flex: 1,
+        overflow: 'hidden',
+    },
+    content: {
+        flex: 1,
+        position: 'relative',
+        overflowX: 'hidden',
+        backgroundColor: '#FFFFFF',
+        padding: '4px', // Add some padding like XP
+    },
     bottomBar: {
         flexShrink: 1,
         width: '100%',
-        height: 20,
+        height: 22, // Slightly taller status bar
+        backgroundColor: '#ECE9D8',
+        borderTop: '1px solid #ACA899',
+        alignItems: 'center',
     },
     bottomSpacer: {
         width: 16,
         marginLeft: 2,
+        height: 16,
+        backgroundColor: '#ECE9D8',
     },
     insetBorder: {
-        border: `1px solid ${Colors.white}`,
-        borderTopColor: colors.darkGray,
-        borderLeftColor: colors.darkGray,
+        border: '1px solid #ACA899',
+        borderTop: '1px solid #FFFFFF',
+        borderLeft: '1px solid #FFFFFF',
         padding: 2,
+        backgroundColor: '#ECE9D8',
     },
     bottomResizeContainer: {
         flex: 2 / 7,
-
         justifyContent: 'flex-end',
-        padding: 0,
+        padding: 2,
         marginLeft: 2,
+        backgroundColor: '#ECE9D8',
     },
     windowTopButtons: {
         // zIndex: 10000,
 
         alignItems: 'center',
+        gap: '2px',
     },
     windowHeader: {
         flex: 1,
+        alignItems: 'center',
+        paddingLeft: 4,
         // justifyContent: 'center',
         // alignItems: 'center',
     },
     windowBarIcon: {
-        paddingLeft: 4,
-        paddingRight: 4,
+        paddingRight: 8,
     },
+    container: {
+        filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))', 
+    }
 };
 
 export default Window;

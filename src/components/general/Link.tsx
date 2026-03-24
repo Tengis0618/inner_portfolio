@@ -74,6 +74,10 @@ const styles: StyleSheetCSS = {
         cursor: 'pointer',
         fontWeight: 'bolder',
         textDecoration: 'underline',
+        fontSize: 12,
+        fontFamily: 'MS Sans Serif, Tahoma, Arial, sans-serif',
+        marginLeft: '10px',
+
     },
     hereIndicator: {
         width: 4,

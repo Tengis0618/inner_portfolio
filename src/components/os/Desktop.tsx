@@ -1,16 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Colors from '../../constants/colors';
+//import Colors from '../../constants/colors';
 import ShowcaseExplorer from '../applications/ShowcaseExplorer';
-import Doom from '../applications/Doom';
-import OregonTrail from '../applications/OregonTrail';
 import ShutdownSequence from './ShutdownSequence';
 // import ThisComputer from '../applications/ThisComputer';
-import Henordle from '../applications/Henordle';
 import Toolbar from './Toolbar';
 import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
-import Scrabble from '../applications/Scrabble';
 import { IconName } from '../../assets/icons';
 import Credits from '../applications/Credits';
+import windowsBg from '../../assets/pictures/windows-bg.webp';
 
 export interface DesktopProps {}
 
@@ -33,37 +30,13 @@ const APPLICATIONS: {
     showcase: {
         key: 'showcase',
         name: 'My Showcase',
-        shortcutIcon: 'showcaseIcon',
+        shortcutIcon: 'Documents',
         component: ShowcaseExplorer,
-    },
-    trail: {
-        key: 'trail',
-        name: 'The Oregon Trail',
-        shortcutIcon: 'trailIcon',
-        component: OregonTrail,
-    },
-    doom: {
-        key: 'doom',
-        name: 'Doom',
-        shortcutIcon: 'doomIcon',
-        component: Doom,
-    },
-    scrabble: {
-        key: 'scrabble',
-        name: 'Scrabble',
-        shortcutIcon: 'scrabbleIcon',
-        component: Scrabble,
-    },
-    henordle: {
-        key: 'henordle',
-        name: 'Henordle',
-        shortcutIcon: 'henordleIcon',
-        component: Henordle,
     },
     credits: {
         key: 'credits',
         name: 'Credits',
-        shortcutIcon: 'credits',
+        shortcutIcon: 'Network',
         component: Credits,
     },
 };
@@ -260,7 +233,13 @@ const styles: StyleSheetCSS = {
     desktop: {
         minHeight: '100%',
         flex: 1,
-        backgroundColor: Colors.turquoise,
+        //backgroundColor: Colors.turquoise,
+        backgroundImage: `url(${windowsBg})`,
+        backgroundSize: 'cover',       // This makes the image cover the entire container
+        backgroundPosition: 'center',  // Centers the image
+        backgroundRepeat: 'no-repeat', // Prevents tiling
+        overflow: 'hidden',            // Prevents scrollbars
+        position: 'relative' 
     },
     shutdown: {
         minHeight: '100%',

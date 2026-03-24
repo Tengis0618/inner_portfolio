@@ -1,187 +1,226 @@
 import React from 'react';
-import me from '../../assets/pictures/workingAtComputer.jpg';
-import meNow from '../../assets/pictures/currentme.jpg';
 import { Link } from 'react-router-dom';
 import ResumeDownload from './ResumeDownload';
+import PathNavBar from './PathNavBar';
+import AboutPicture from '../../assets/pictures/about_picture.jpg';
+import WindowsXPPicture from '../../assets/pictures/windows_xp.jpg'; // Add your Windows XP image
 
 export interface AboutProps {}
 
 const About: React.FC<AboutProps> = (props) => {
     return (
-        // add on resize listener
-        <div className="site-page-content">
-            {/* <img src={me} style={styles.topImage} alt="" /> */}
-            <h1 style={{ marginLeft: -16 }}>Welcome</h1>
-            <h3>I'm Henry Heffernan</h3>
-            <br />
-            <div className="text-block">
-                <p>
-                    I'm a software engineer currently working at Vercel! In May
-                    of 2022 I graduated from Rensselaer Polytechnic Institute
-                    with my BS in Computer Science.
-                </p>
-                <br />
-                <p>
-                    Thank you for taking the time to check out my portfolio. I
-                    really hope you enjoy exploring it as much as I enjoyed
-                    building it. If you have any questions or comments, feel
-                    free to contact me using{' '}
-                    <Link to="/contact">this form</Link> or shoot me an email at{' '}
-                    <a href="mailto:henryheffernan@gmail.com">
-                        henryheffernan@gmail.com
-                    </a>
-                </p>
-            </div>
-            <ResumeDownload />
-            <div className="text-block">
-                <h3>About Me</h3>
-                <br />
-                <p>
-                    From a young age, I have had a curiosity about how things
-                    worked. This naturally led me to become absolutely obsessed
-                    with Lego and I fell in love with building things. In
-                    elementary school, I joined the Lego Robotics team at my
-                    local middle school, which was my first real exposure to
-                    programming. In 2008, my family and I moved across the
-                    country from California to New York, where I attended middle
-                    school, high school, and college.
-                </p>
-                <br />
-                <div className="captioned-image">
-                    <img src={me} style={styles.image} alt="" />
-                    <p>
-                        <sub>
-                            <b>Figure 1:</b> A real photo of me developing this
-                            website :)
-                        </sub>
+        <div style={styles.aboutContainer}>
+            {/* Path Nav bar*/}
+                <PathNavBar currentDirectory='Introduction'/>
+            {/* Main Content */}
+            <div style={styles.mainContent}>
+                {/* Title and Description */}
+                <div style={styles.headerSection}>
+                    <h1 style={styles.title}>Introduction</h1>
+                </div>
+
+                {/* Introduction Panel */}
+                <div style={styles.blogContent}>
+                    <div style={styles.textBlock}>
+                        <p style={styles.paragraph}>
+                            I'm a software engineer enthusiast! In May
+                            of 2025 I graduated from New York University Abu Dhabi
+                            with my BS in Computer Science.
+                            Thank you for taking the time to check out my portfolio. I
+                            really hope you enjoy exploring it as much as I enjoyed
+                            building it. If you have any questions or comments, feel
+                            free to contact me using{' '}
+                            <Link to="/contact" style={styles.link}>this form</Link> or shoot me an email at{' '}
+                            <a href="mailto:tt2273@nyu.edu" style={styles.link}>
+                                tt2273@nyu.edu
+                            </a>
+                        </p>                    
+                    </div>
+
+                {/* About Me Panel */}
+                <div style={styles.sectionBlock}>
+                    <h2 style={styles.sectionTitle}>About Me</h2>
+                    <p style={styles.paragraph}>
+                        I'm a recent Computer Science graduate from New York University Abu Dhabi and software engineer currently working at Golomt Bank, where I'm gaining valuable experience in the fintech industry. 
+                        As a fresh graduate, I bring enthusiasm for clean code and modern development practices, with strong foundations in Java, Python, JavaScript, and C.
+                    </p>
+                    <p style={styles.paragraph}>
+                        At Golomt Bank, I'm developing my skills in enterprise-level software development while contributing to banking solutions that serve thousands of customers. My diverse programming background allows me to adapt quickly to different projects and technologies as needed.
+                    </p>
+                    <p style={styles.paragraph}>
+                        I'm passionate about leveraging technology to solve real-world problems, particularly in the financial sector where reliability and security are paramount. As someone early in my career, I'm eager to continue learning, take on new challenges, and grow alongside experienced developers.
+                        When I'm not coding, I enjoy exploring new technologies and staying current with industry trends. I believe in the power of continuous learning and am always excited to contribute to projects that make a meaningful impact.
                     </p>
                 </div>
 
-                <p>
-                    I started programming more seriously in high school,
-                    initially learning how to scrape and interact with websites.
-                    I went on to do a ton of passion projects, many of them with
-                    one of my closest friends,{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://www.linkedin.com/in/scott-bass-189a7919b/"
-                    >
-                        Scott Bass
-                    </a>
-                    . We worked on many projects together, including chat bots,
-                    multiple game projects, apps, and more. One of these
-                    projects is viewable on my{' '}
-                    <Link to="/projects/software">Software Projects</Link> page.
-                </p>
-                <br />
-                <p>
-                    In 2017, I got accepted into Rennselear Polytechnic
-                    Institute to study Computer Science. It was my first choice
-                    and I was absolutely ecstatic to be going to such a great
-                    university. At the end of my sophomore year, I got an
-                    internship working for the startup Hover, primarily focusing
-                    on frontend work. I continued to work at Hover on and off
-                    for about a year and a half, until the start of my senior
-                    year when I decided to focus on other opportunities.
-                </p>
-                <br />
-                <br />
-                <div style={{}}>
-                    <div
-                        style={{
-                            flex: 1,
-                            textAlign: 'justify',
-                            alignSelf: 'center',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <h3>My Hobbies</h3>
-                        <br />
-                        <p>
-                            Beyond software, I have a lot of hobbies that I
-                            enjoy doing in my free time. The more tangible
-                            hobbies I have are{' '}
-                            <Link to="/projects/music">Music Production</Link>{' '}
-                            and creating{' '}
-                            <Link to="/projects/art">Digital Art</Link>. You can
-                            read more about each of these on their respective
-                            pages under my projects tab. Some other hobbies I
-                            enjoy are working out, cooking, and (unsurprisingly)
-                            playing video games.
-                        </p>
-                        <br />
-                        <p>
-                            In college, I was an active member in the fraternity
-                            Sigma Alpha Epsilon and held multiple positions in
-                            the chapter. I met a lot of amazing people through
-                            my fraternity and thoroughly enjoyed the community.
+                {/* Early Interests Section */}
+                <div style={styles.sectionBlock}>
+                    <h2 style={styles.sectionTitle}>Early Inspirations</h2>
+                    <p style={styles.paragraph}>
+                        From a young age, I've always been fascinated by building and exploring things. Whether it was taking apart old electronics to see how they worked or constructing elaborate projects from scratch, I had an insatiable curiosity about how things functioned. This hands-on approach to learning shaped my problem-solving mindset and laid the foundation for my journey into technology.
+                    </p>
+                    <p style={styles.paragraph}>
+                        My first real computer experience was with Windows XP—that iconic operating system with its rolling green hills wallpaper and the satisfying startup sound. I remember spending countless hours exploring every corner of the system, customizing themes, playing with Paint and Spider. The intuitive interface and playful design elements of Windows XP sparked something in me—a realization that technology could be both powerful and accessible.
+                    </p>
+
+                    {/* Windows XP Image */}
+                    <div style={styles.imageContainer}>
+                        <div style={styles.imageFrame}>
+                            <img src={AboutPicture} alt="Young me" style={styles.image} />
+                        </div>
+                        <p style={styles.caption}>
+                            <b>Figure 1:</b> My aunt introducing me to the great white XP
                         </p>
                     </div>
-                    <div style={styles.verticalImage}>
-                        <img src={meNow} style={styles.image} alt="" />
-                        <p>
-                            <sub>
-                                <b>Figure 2:</b> Me, April 2022
-                            </sub>
-                        </p>
-                    </div>
+
+                    <p style={styles.paragraph}>
+                        This nostalgic connection to Windows XP is actually the inspiration behind this portfolio's design. I wanted to recreate that sense of wonder and exploration I felt as a kid discovering technology for the first time. The retro aesthetic isn't just a visual choice—it's a tribute to where my journey began and a reminder that the best interfaces are those that invite curiosity and make complex systems feel approachable. 
+                    </p>
                 </div>
-                <br />
-                <br />
-                <p>
-                    Thanks for reading about me! I hope that you enjoy exploring
-                    the rest of my portfolio website and everything it has to
-                    offer. If you find the easter egg make sure to let me know
-                    on twitter{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://twitter.com/henryheffernan"
-                    >
-                        @henryheffernan
-                    </a>{' '}
-                    Good luck and have fun!
-                </p>
-                <br />
-                <p>
-                    If you have any questions or comments I would love to hear
-                    them. You can reach me through the{' '}
-                    <Link to="/contact">contact page</Link> or shoot me an email
-                    at{' '}
-                    <a href="mailto:henryheffernan@gmail.com">
-                        henryheffernan@gmail.com
-                    </a>
-                </p>
+
+                {/* Closing Panel */}
+                <div style={styles.sectionBlock}>
+                    <h2 style={styles.sectionTitle}>Get In Touch</h2>
+                    <p style={styles.paragraph}>
+                        Thank you for getting to know me better! I'm excited for you to dive into the rest of my work and see what I've been building. 
+                        I'm always open to conversations, whether about my projects, potential collaborations, or just tech in general. 
+                        Feel free to get in touch through the {' '}
+                        <Link to="/contact" style={styles.link}>contact section</Link> or shoot me an email
+                        at{' '}
+                        <a href="mailto:tt2273@nyu.edu" style={styles.link}>
+                            tt2273@nyu.edu
+                        </a>
+                    </p>
+                </div>
+
+                <ResumeDownload/>
+                </div>
+
+                {/* Placeholder spacing */}
+                <div style={styles.placeholderSpace}></div>
             </div>
         </div>
     );
 };
 
 const styles: StyleSheetCSS = {
-    contentHeader: {
-        marginBottom: 16,
-        fontSize: 48,
-    },
-    image: {
-        height: 'auto',
+    aboutContainer: {
         width: '100%',
-    },
-    topImage: {
-        height: 'auto',
-        width: '100%',
-        marginBottom: 32,
-    },
-    verticalImage: {
-        alignSelf: 'center',
-        // width: '80%',
-        marginLeft: 32,
-        flex: 0.8,
-
-        alignItems: 'center',
-        // marginBottom: 32,
-        textAlign: 'center',
+        height: '100vh',
+        backgroundColor: '#FFFFFF',
+        fontFamily: 'MS Sans Serif, Tahoma, Arial, sans-serif',
+        fontSize: '14px',
+        marginLeft: '200px',
+        paddingLeft: '16px',
+        boxSizing: 'border-box',
+        display: 'flex',
         flexDirection: 'column',
+    },
+
+    mainContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        padding: '16px',
+        paddingBottom: '0',
+        gap: '1.2em',
+        overflowY: 'scroll',
+        flex: 1,
+        minHeight: 0,
+    },
+
+    title: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '32px',
+        fontWeight: 'bold',
+        margin: '0',
+        color: '#000000',
+    },
+
+    blogContent: {
+        width: '100%',
+        maxWidth: '800px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+    },
+
+    textBlock: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+    },
+
+    paragraph: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '16px',
+        lineHeight: '1.6',
+        margin: '0',
+        color: '#333333',
+        textAlign: 'justify',
+    },
+
+    sectionBlock: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+    },
+
+    sectionTitle: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        margin: '0',
+        color: '#000000',
+    },
+
+     placeholderSpace: {
+        width: '100%',
+        height: '160px',
+        backgroundColor: '#FFFFFF',
+        flexShrink: 0,
+    },
+
+    link: {
+        color: '#0000FF',
+        textDecoration: 'underline',
+        fontSize: '16px',
+        fontFamily: 'Dosvgabold',
+    },
+
+    imageContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '12px',
+        margin: '20px 0',
+    },
+
+    imageFrame: {
+        border: '2px solid #0054E3',
+        padding: '4px',
+        backgroundColor: '#F0F0F0',
+        display: 'inline-block',
+        borderRadius: '4px',
+        boxShadow: '2px 2px 0 rgba(0,0,0,0.2)',
+        boxSizing: 'border-box',
+    },
+
+    image: {
+        maxWidth: '100%',
+        height: 'auto',
+        display: 'block',
+        boxSizing: 'border-box',
+    },
+
+    caption: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '14px',
+        fontStyle: 'italic',
+        margin: '0',
+        color: '#666666',
+        textAlign: 'center',
     },
 };
 

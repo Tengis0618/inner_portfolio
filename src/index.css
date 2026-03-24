@@ -38,6 +38,10 @@ code {
     src: url(./assets/fonts/Terminal.ttf);
 }
 
+@font-face {
+    font-family: Dosvgabold;
+    src: url(./assets/fonts/dosvgabold.ttf);
+}
 
 * {
     -webkit-touch-callout: none;
@@ -67,9 +71,16 @@ p b {
 }
 
 .showcase-header {
+    /*
     font-family: lores-15-bold-alt-oakland;
     font-size: 15px;
     color: white;
+    */
+    color: #FFFFFF !important;
+    font-weight: bold;
+    font-size: 13px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 
 .toolbar-text {

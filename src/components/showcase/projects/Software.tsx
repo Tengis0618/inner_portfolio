@@ -1,290 +1,225 @@
 import React from 'react';
-// @ts-ignore
-import saga from '../../../assets/pictures/projects/software/saga.mp4';
-// @ts-ignore
-import computer from '../../../assets/pictures/projects/software/computer.mp4';
-// @ts-ignore
-import scroll from '../../../assets/pictures/projects/software/scroll.mp4';
 import ResumeDownload from '../ResumeDownload';
-import VideoAsset from '../../general/VideoAsset';
+import PathNavBar from '../PathNavBar';
+import WindowsXPPortfolioItem, { type PortfolioItem } from './projects-item';
+import diffusionImage from '../../../assets/pictures/diffusion-models-2.png';
+import techieImage from '../../../assets/pictures/Tech_Jobs_Portal_in_USA.jpg';
+import qaImage from '../../../assets/pictures/anonymous-q-a.png';
+import weatherBeats from '../../../assets/pictures/logo-weatherBeats.png';
+import canQr from '../../../assets/pictures/canQr-picture.png';
+import blackjack from '../../../assets/pictures/blackjack.png';
 
-export interface SoftwareProjectsProps {}
+export interface AboutProps {}
 
-const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
+const projects: PortfolioItem[] = [
+    {
+        title: "Diffusion Model - Image Generation",
+        description:
+            "Context-aware diffusion model for generating cosmological hydrogen intensity maps conditioned on astrophysical and cosmological parameters using the CAMELS dataset.",
+        picture: diffusionImage,
+        link: "https://github.com/Tengis0618/CAMELS-Diffusion-Model",
+    },
+    {
+        title: "canQr",
+        description:
+            "We combine classical quantum chemistry (PySCF) with quantum algorithms (VQE using PennyLane) to calculate binding energies and optimize drug candidates. It optimizes drug parameters to maximize binding selectivity.",
+        picture: canQr,
+        link: "https://github.com/alibinauanov/hackathon2025-canQr",
+    },
+    {
+        title: "Weather-Beats",
+        description:
+            "WeatherBeats is your go-to web application for seamlessly pairing your music with the current weather conditions. Say goodbye to the guesswork and let WeatherBeats create the perfect soundtrack for your day.",
+        picture: weatherBeats,
+        link: "https://github.com/Weather-Beats",
+    },
+    {
+        title: "Techie Job Portal",
+        description:
+            "Techie is a comprehensive web application designed to revolutionize the tech job search experience. With Techie, finding the perfect job or the ideal candidate has never been easier.",
+        picture: techieImage,
+        link: "https://github.com/Tengis0618/Techie",
+    },
+    {
+        title: "Anonymous Q-A",
+        description:
+            "Question-and-answer site where users post questions and answers to these questions anonymously. This single page app uses AJAX calls instead of regular page rendering and form submission.",
+        picture: qaImage,
+        link: "https://github.com/Tengis0618/Q-A-site",
+    },
+    {
+        title: "BlackJack",
+        description:
+            "Client-side card game each player will try to construct a hand of cards that's equal to 21 or as close to 21 as possible, without going over the sum of the numeric values of the cards.",
+        picture: blackjack,
+        link: "https://github.com/Tengis0618/Blackjack",
+    },
+];
+
+const About: React.FC<AboutProps> = (props) => {
     return (
-        <div className="site-page-content">
-            <h1>Software</h1>
-            <h3>Projects</h3>
-            <br />
-            <p>
-                Below are some of my favorite software projects I have worked on
-                over the last few years.
-            </p>
-            <br />
-            <ResumeDownload />
-            <br />
-            <div className="text-block">
-                <h2>henryheffernan.com</h2>
-                <br />
-                <p>
-                    henryheffernan.com is my portfolio website, and also the
-                    website you are on right now. This project was an absolute
-                    joy to make and challenged me both technically and
-                    creatively. Early in 2022, I knew I wanted to make an
-                    interactive portfolio to aid my job search. I eventually got
-                    the idea for this site around early February and began
-                    development early March. I've been developing it alongside
-                    my last semester at school and if you are reading this, it's
-                    pretty much done!
-                </p>
-                <br />
-                <div className="captioned-image">
-                    <VideoAsset src={computer} />
-                    <p style={styles.caption}>
-                        <sub>
-                            <b>Figure 1:</b> Blender Scene of the 3D website.
-                            The scene from Blender was baked and exported in a
-                            GLTF format.
-                        </sub>
+        <div style={styles.aboutContainer}>
+            {/* Path Nav bar*/}
+            <PathNavBar currentDirectory='Projects/Software'/>
+
+            {/* Main Content with Portfolio Grid */}
+            <div style={styles.mainContent}>
+                {/* Title and Description */}
+                <div style={styles.headerSection}>
+                    <h1 style={styles.title}>Software Projects</h1>
+                    <p style={styles.description}>
+                        Explore my collection of software projects showcasing full-stack development, 
+                        AI integration, and modern web technologies. Each project demonstrates my 
+                        commitment to creating interesting and challenging solutions.
                     </p>
                 </div>
-                <p>
-                    Now, a quick technical breakdown of the site. The website is
-                    split into two parts, the 3D site, and the 2D OS site. The
-                    3D site uses Three.js to render the scene and renders the 2D
-                    site inside of it using an iframe. The 2D OS site is a
-                    simple react site that is hosted{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://henryheffernan.vercel.app/"
-                    >
-                        here
-                    </a>{' '}
-                    and works as a standalone web app. The actual rendering of
-                    the 2D site is accomplished using a CSS renderer provided by
-                    Three.js that transforms the html of the 2D site with 3D CSS
-                    transforms to give the illusion of three dimensionality.
-                </p>
-                <br />
-                <h3>Links:</h3>
-                <ul>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://henryheffernan.com"
-                        >
-                            <p>
-                                <b>[3D Site]</b> - henryheffernan.com
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://henryheffernan.vercel.app/"
-                        >
-                            <p>
-                                <b>[OS Site]</b> - henryheffernan.vercel.app
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/henryjeff/portfolio-website"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - 3D Site Repository
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/henryjeff/portfolio-inner-site"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - OS Site Repository
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-                <p>
-                    I'm skipping over a lot of details in exchange for brevity,
-                    but I do plan on doing a more in depth breakdown for those
-                    interested sometime in the future. To get updates with that
-                    project feel free to follow me on twitter{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://twitter.com/henryheffernan"
-                    >
-                        @henryheffernan
-                    </a>
-                </p>
-            </div>
-            <div className="text-block">
-                <h2>Guntattchment Saga The Sequel</h2>
-                <br />
-                <p>
-                    Guntattchment Saga or GSTS is a game I made with my good
-                    friend Scott Bass back in 2019. The game is a wave based top
-                    down shooter where you progress by building the most
-                    outrageous of weapons through attaching as many attachments
-                    on your weapon as you can. The game ceased development in
-                    2019 because we unfortunately both had packed school
-                    schedules and were unable to find the time to work on it.
-                </p>
-                <br />
-                <div className="captioned-image">
-                    <VideoAsset src={saga} />
-                    <div style={styles.caption}>
-                        <p>
-                            <sub>
-                                <b>Figure 2: </b> Guntattchment Saga Gameplay
-                                demo, featuring the main character along with a
-                                few of our grunt and dasher enemies.
-                            </sub>
+
+                {/* Resume Download */}
+                <div style={styles.resumeSection}>
+                    <ResumeDownload/>
+                </div>
+
+                {/* Projects Grid */}
+                <div style={styles.grid}>
+                    {projects.map((item, index) => (
+                        <WindowsXPPortfolioItem key={index} item={item} index={index} />
+                    ))}
+                </div>
+
+                {/* Footer Section */}
+                <div style={styles.footerSection}>
+                    <div style={styles.footerContent}>
+                        <p style={styles.footerText}>
+                            Interested in seeing more? Check out my{' '}
+                            <a 
+                                href="https://github.com/Tengis0618" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                style={styles.githubLink}
+                            >
+                                GitHub
+                            </a>
+                            {' '}for additional projects and contributions.
                         </p>
                     </div>
                 </div>
-                <p>
-                    Guntattchment Saga was a really fun project to work on and
-                    had a multitude of challenges. An interesting challenge that
-                    you may not even notice was the rotation of objects such as
-                    the players weapon. Rotating pixel art is a very difficult
-                    thing to do because in the world of pixels you are dealing
-                    with such a little amount of information. Even a single
-                    misplaced pixel can cause a sprite to read in a totally
-                    different and unintended way. To deal with this we developed
-                    an algorithm to prioritize outlines, while rotating the
-                    insides with a simple Nearest Neighbor algorithm. Doing so
-                    resulted in a relatively readable sprite when rotating
-                    sprites. It was a surprisingly difficult challenge as it
-                    intersected both art and programming, but was fun to work on
-                    overall.
-                </p>
-                <br />
-                <h3>Links:</h3>
-                <ul>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/scottbass47/gsts"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - Guntattchment Saga The Sequel
-                                Unity Repository
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/henryjeff/gsts_assets"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - Guntattchment Saga The Sequel
-                                Assets Repository
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-                <p>
-                    Unfortunately, the game currently is not in a releasable
-                    state and so there is no demo available online. If this ever
-                    changes, however, a link to the game will be added here.
-                </p>
+
+                {/* Placeholder spacing after footer */}
+                <div style={styles.placeholderSpace}></div>
             </div>
-            <div className="text-block">
-                <h2>Skip the Scroll</h2>
-                <br />
-                <p>
-                    While working at Hover, I spent a lot of time on GitHub
-                    issue pages looking for answers and solutions to problems I
-                    had run into. I would always find myself sifting though the
-                    comments trying to find the right answer, which usually had
-                    the most upvotes and positive reactions. With that
-                    information, I decided to create a very simple chrome
-                    extension that would sift through all the comments on the
-                    page, sort them by positive reactions, and then allow you to
-                    traverse them from most positive reactions to least positive
-                    reactions.
-                </p>
-                <br />
-                <div className="captioned-image">
-                    <VideoAsset src={scroll} />
-                    <p style={styles.caption}>
-                        <sub>
-                            <b>Figure 3:</b> Skip the Scroll in action, finding
-                            the highest rated comments and scrolling right to
-                            them
-                        </sub>
-                    </p>
-                </div>
-                <p>
-                    The extension is open source and currently released on the
-                    Chrome web store. Skip the Scroll is obviously not a project
-                    with massive scope, but was fun to make and dive into the
-                    world of browser extensions. I wanted to showcase since it's
-                    a developer tool and I wanna give it some visibility for
-                    those who might find it useful.
-                </p>
-                <br />
-                <h3>Links:</h3>
-                <ul>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://github.com/henryjeff/skip-the-scroll"
-                        >
-                            <p>
-                                <b>[GitHub]</b> - Skip the Scroll Repository
-                            </p>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href="https://chrome.google.com/webstore/detail/skip-the-scroll/mfehannpjmgfagldoilpngeoecdfgmnd"
-                        >
-                            <p>
-                                <b>[Chrome Web Store]</b> - Skip the Scroll
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-                <p>
-                    If you are a developer and have also found yourself
-                    scrolling through github comment after github comment saying
-                    "i also have this problem...", then I highly recommend you
-                    check out Skip the Scroll to save you some of your precious
-                    time. If you like it, feel free to star it on GitHub and
-                    rate it on the Chrome web store.
-                </p>
-            </div>
-            <ResumeDownload />
         </div>
     );
 };
 
 const styles: StyleSheetCSS = {
-    video: {
+    aboutContainer: {
         width: '100%',
-        padding: 12,
+        height: '100vh',
+        backgroundColor: '#FFFFFF',
+        fontFamily: 'MS Sans Serif, Tahoma, Arial, sans-serif',
+        fontSize: '14px',
+        marginLeft: '200px',
+        paddingLeft: '16px',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
     },
-    caption: {
-        width: '80%',
+
+    mainContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        padding: '16px',
+        paddingBottom: '0', // Removed bottom padding since we have placeholder
+        gap: '1.2em',
+        overflowY: 'scroll',
+        flex: 1,
+        minHeight: 0,
+    },
+
+    headerSection: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '12px',
+        textAlign: 'center',
+    },
+
+    title: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '32px',
+        fontWeight: 'bold',
+        margin: '0',
+        color: '#000000',
+    },
+
+    description: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '16px',
+        lineHeight: '1.6',
+        margin: '0',
+        maxWidth: '800px',
+        color: '#333333',
+    },
+
+    resumeSection: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        boxSizing: 'border-box',
+    },
+
+    grid: {
+        display: 'grid',
+        gap: '24px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        width: '100%',
+    },
+
+    footerSection: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: '24px',
+        boxSizing: 'border-box',
+    },
+
+    footerContent: {
+        width: '100%',
+        maxWidth: '800px',
+        border: '2px solid #0054E3',
+        background: 'linear-gradient(to bottom, #EBF4FF, #D8EBFF)',
+        padding: '24px',
+        boxShadow: '2px 2px 0 rgba(0,0,0,0.2)',
+        borderRadius: '4px',
+        textAlign: 'center',
+    },
+
+    footerText: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '16px',
+        lineHeight: '1.6',
+        margin: '0',
+        color: '#000080',
+    },
+
+    githubLink: {
+        fontFamily: 'Dosvgabold',
+        fontSize: '16px',
+        color: '#0054E3',
+        textDecoration: 'underline',
+        fontWeight: 'bold',
+        transition: 'color 0.2s',
+    },
+
+    placeholderSpace: {
+        width: '100%',
+        height: '150px', // Adjust this value as needed for more or less space
+        backgroundColor: '#FFFFFF',
+        flexShrink: 0,
     },
 };
 
-export default SoftwareProjects;
+export default About;

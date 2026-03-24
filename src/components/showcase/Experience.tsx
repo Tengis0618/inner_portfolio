@@ -1,293 +1,305 @@
-import React from 'react';
-import ResumeDownload from './ResumeDownload';
+import React, { useState } from 'react';
+import PathNavBar from './PathNavBar';
 
 export interface ExperienceProps {}
 
-const Experience: React.FC<ExperienceProps> = (props) => {
-    return (
-        <div className="site-page-content">
-            <ResumeDownload />
-            <div style={styles.headerContainer}>
-                <div style={styles.header}>
-                    <div style={styles.headerRow}>
-                        <h1>Hover</h1>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href={'https://hover.gg/'}
-                        >
-                            <h4>www.hover.gg</h4>
-                        </a>
-                    </div>
-                    <div style={styles.headerRow}>
-                        <h3>Frontend Engineer</h3>
-                        <b>
-                            <p>Summer 2020 - Fall 2021</p>
-                        </b>
-                    </div>
+interface ExperienceData {
+  id: string;
+  company: string;
+  position: string;
+  duration: string;
+  location: string;
+  website?: string;
+  description: string;
+  achievements: string[];
+}
+
+const Experience: React.FC<ExperienceProps> = () => {
+  const [expandedPanels, setExpandedPanels] = useState<Set<string>>(new Set());
+
+  const experienceData: ExperienceData[] = [
+    {
+      id: 'golomt-bank',
+      company: 'Golomt Bank',
+      position: 'Full Stack Software Engineer',
+      duration: 'Aug. 2025 – Now',
+      location: 'Ulaanbaatar, Mongolia',
+      description: 'Developed full-stack web applications and collaborated with the tech team to optimize internal workflows.',
+      achievements: [
+        'Developed and maintained a mobile banking application serving 10,000+ daily active users, ensuring high availability and performance under peak load conditions',
+        'Built robust backend services using Java Spring Boot framework, implementing secure APIs for financial transactions and account management features',
+        'Managed and deployed applications to UAT Kubernetes clusters, optimizing container orchestration and implementing CI/CD pipelines for seamless development workflows'
+      ]
+    },
+    {
+      id: 'spade-labs',
+      company: 'Spade Labs',
+      position: 'Full Stack Engineer Intern',
+      duration: 'Jul. 2024 – Sept. 2024',
+      location: 'Brooklyn, NY',
+      description: 'Worked as a Full Stack Engineer Intern developing AI-powered applications and scalable backend systems.',
+      achievements: [
+        'Trained and optimized large language models (LLMs), enhancing performance and accuracy on sentiment analysis',
+        'Set up and managed a backend with Django REST framework, including integration with AWS PostgreSQL RDS for scalable database management',
+        'Utilized Celery to implement and manage asynchronous tasks for web scrapers, ensuring efficient and reliable data retrieval processes'
+      ]
+    },
+    {
+      id: 'mofa',
+      company: 'MOFA Government Agency',
+      position: 'IT Intern',
+      duration: 'Jun. 2023 – Aug. 2023',
+      location: 'Ulaanbaatar, Mongolia',
+      description: 'Provided IT support and web development services for a government agency serving a large user base.',
+      achievements: [
+        'Contributed to maintaining a web application that scaled to a large base of users, regularly updating and reviewing the internal website contents',
+        'Provided technical support to over 20 staff members, resolving hardware and software issues and improving response time',
+        'Configured and monitored network devices, supporting secure data transmission and enhancing system reliability'
+      ]
+    },
+    {
+      id: 'violet-ventures',
+      company: 'Violet Ventures',
+      position: 'Web Developer',
+      duration: 'Feb. 2023 – Apr. 2023',
+      location: 'Abu Dhabi, UAE',
+      description: 'Developed full-stack web applications and collaborated with the tech team to optimize internal workflows.',
+      achievements: [
+        'Built and optimized a full-stack web application in collaboration with the Violet Ventures tech team, streamlining internal workflows and enhancing user experience',
+        'Implemented responsive UI components using React and integrated backend APIs to support real-time data interactions',
+        'Wrote technical documentation and onboarding guides for future developers, increasing team efficiency and reducing ramp-up time'
+      ]
+    }
+  ];
+
+  const togglePanel = (panelId: string) => {
+    const newExpandedPanels = new Set(expandedPanels);
+    if (newExpandedPanels.has(panelId)) {
+      newExpandedPanels.delete(panelId);
+    } else {
+      newExpandedPanels.add(panelId);
+    }
+    setExpandedPanels(newExpandedPanels);
+  };
+
+  const isPanelExpanded = (panelId: string) => expandedPanels.has(panelId);
+
+  return (
+    <div style={styles.experienceContainer}>
+      {/* Path Nav Bar */}
+      <div style={styles.navBarContainer}>
+        <PathNavBar currentDirectory='Experience' />
+      </div>
+
+      {/* Scrollable Content */}
+      <div style={styles.scrollableContent}>
+        {experienceData.map((experience) => (
+          <div key={experience.id} style={styles.accordionContainer}>
+            {/* Accordion Header - Always visible */}
+            <div 
+              style={styles.accordionHeader}
+              onClick={() => togglePanel(experience.id)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#D4D0C8';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#C0C0C0';
+              }}
+            >
+              <div style={styles.leftSection}>
+                <span style={styles.icon}>💼</span>
+                <span style={styles.accordionTitle}>
+                  {experience.company} - {experience.position}
+                </span>
+              </div>
+              
+              <div style={styles.rightSection}>
+                <span style={styles.durationText}>{experience.duration}</span>
+                <span style={styles.separator}>•</span>
+                <span style={styles.locationText}>{experience.location}</span>
+                <span style={styles.expandIcon}>
+                  {isPanelExpanded(experience.id) ? '▼' : '▶'}
+                </span>
+              </div>
+            </div>
+
+            {/* Accordion Content - Only shows when expanded */}
+            {isPanelExpanded(experience.id) && (
+              <div style={styles.accordionContent}>
+                <div style={styles.achievementsList}>
+                  {experience.achievements.map((achievement, index) => (
+                    <React.Fragment key={index}>
+                      <span style={styles.achievementText}>
+                        • {achievement}
+                      </span>
+                      {index < experience.achievements.length - 1 && (
+                        <>
+                          <br />
+                          <br />
+                        </>
+                      )}
+                    </React.Fragment>
+                  ))}
                 </div>
-            </div>
-            <div className="text-block">
-                <p>
-                    Targeted towards online content creators and streamers
-                    looking to build a brand, Hover is the home of over 150K
-                    users. Written in Typescript using React, React-Native,
-                    Framer, Express, and Redux.
-                </p>
-                <br />
-                <ul>
-                    <li>
-                        <p>
-                            Architected and engineered the vertical scrolling
-                            discover player which, at its daily peak, was
-                            responsible for generating over 600,000 views across
-                            20,000 active users.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Designed and implemented multiple features to
-                            increase app usability and user experience while
-                            ensuring the quality, maintainability and
-                            scalability of the front end as the user base grew
-                            by over 50,000.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Coordinated major refactors targeted towards app
-                            optimization and performance resulting in a smoother
-                            user experience and accomplished by eliminating
-                            redundant re-renders and API calls by over 50%.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Directed and executed an internal migration of 3
-                            individual repositories to a single monorepo,
-                            greatly reducing overhead for developing new
-                            features, fixing bugs, and managing dependencies.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Rebuilt the website with React and shared mobile app
-                            components allowing users to access a wide variety
-                            of app interactions entirely on the web, resulting
-                            in over 700,000 total site visits.
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <div style={styles.headerContainer}>
-                <div style={styles.header}>
-                    <div style={styles.headerRow}>
-                        <h1>BrACS</h1>
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href={'https://bracs.co/'}
-                        >
-                            <h4>www.bracs.co</h4>
-                        </a>
-                    </div>
-                    <div style={styles.headerRow}>
-                        <h3>Team Lead & Engineer</h3>
-                        <b>
-                            <p>Fall 2021 - Spring 2022</p>
-                        </b>
-                    </div>
-                </div>
-            </div>
-            <div className="text-block">
-                <p>
-                    Supervised and developed the front end of bracs.co, a
-                    beautifully simple and effective bracket creation and
-                    management engine. Written in Typescript using React and
-                    deployed using AWS Elastic Beanstalk.
-                </p>
-                <br />
-                <ul>
-                    <li>
-                        <p>
-                            Managed the project and team members by conducting
-                            bi-weekly stand-ups.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Architected bracket view UI using React Flow and
-                            custom bracket data types built from binary trees.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Created conversion algorithms to serialize bracket
-                            tree data to allow for saving in the cloud.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Implemented bracket generation utilities which
-                            employ gray code for proper team seeding and
-                            placement.
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <div style={styles.headerContainer}>
-                <div style={styles.header}>
-                    <div style={styles.headerRow}>
-                        <h1>K-F/X</h1>
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href={'https://kfxnyc.com/'}
-                        >
-                            <h4>www.kfxnyc.com</h4>
-                        </a>
-                    </div>
-                    <div style={styles.headerRow}>
-                        <h3>Special Effects Technician</h3>
-                        <b>
-                            <p>Fall 2019, Summer 2021</p>
-                        </b>
-                    </div>
-                </div>
-            </div>
-            <div className="text-block">
-                <p>
-                    Applied problem solving and technical skills to operate
-                    large equipment such as rain machines, fog machines, small
-                    explosives and general rigging with a professional crew of
-                    50+ people.
-                </p>
-                <br />
-                <h3 style={styles.indent}>Screen Credits:</h3>
-                <ul>
-                    <li style={styles.row}>
-                        <p>• Ray Donovan</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.sho.com/ray-donovan"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                SHOWTIME
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• Ray Donovan: The Movie</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.sho.com/titles/3508117/ray-donovan-the-movie"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                SHOWTIME
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• Hightown</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.starz.com/us/en/series/hightown/57463"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                STARZ
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• Bull</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.cbs.com/shows/bull/"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                CBS
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>• At Home with Amy Sedaris</p>
-                        <p>
-                            [{' '}
-                            <a
-                                href="https://www.trutv.com/shows/at-home-with-amy-sedaris"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                truTV
-                            </a>{' '}
-                            ]
-                        </p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    );
+              </div>
+            )}
+          </div>
+        ))}
+        
+        {/* Placeholder spacing */}
+        <div style={styles.placeholderSpace}></div>
+      </div>
+    </div>
+  );
 };
 
 const styles: StyleSheetCSS = {
-    header: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        width: '100%',
-    },
-    skillRow: {
-        flex: 1,
-        justifyContent: 'space-between',
-    },
-    skillName: {
-        minWidth: 56,
-    },
-    skill: {
-        flex: 1,
-        padding: 8,
-        alignItems: 'center',
-    },
-    progressBar: {
-        flex: 1,
-        background: 'red',
-        marginLeft: 8,
-        height: 8,
-    },
-    hoverLogo: {
-        height: 32,
-        marginBottom: 16,
-    },
-    headerContainer: {
-        alignItems: 'flex-end',
-        width: '100%',
-        justifyContent: 'center',
-    },
-    hoverText: {
-        marginBottom: 8,
-    },
-    indent: {
-        marginLeft: 24,
-    },
-    headerRow: {
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-    },
-    row: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
+  experienceContainer: {
+    width: '100%',
+    height: '100vh',
+    backgroundColor: '#FFFFFF',
+    fontFamily: 'MS Sans Serif, Tahoma, Arial, sans-serif',
+    fontSize: '11px',
+    marginLeft: '200px',
+    paddingLeft: '16px',
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  navBarContainer: {
+    flexShrink: 0,
+    width: '100%',
+  },
+
+  scrollableContent: {
+    padding: '16px',
+    paddingTop: '8px',
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    overflowY: 'scroll',
+    flex: 1,
+    minHeight: 0,
+  },
+
+  accordionContainer: {
+    border: '2px outset #FFFFFF',
+    borderTop: '2px solid #DFDFDF',
+    borderLeft: '2px solid #DFDFDF',
+    borderRight: '2px solid #808080',
+    borderBottom: '2px solid #808080',
+    backgroundColor: '#C0C0C0',
+    //overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+
+  accordionHeader: {
+    backgroundColor: '#C0C0C0',
+    padding: '6px 12px',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    userSelect: 'none',
+    transition: 'background-color 0.1s ease',
+    color: '#000000',
+    fontFamily: 'Dosvgabold',
+    fontSize: '11px',
+    width: '100%',
+    boxSizing: 'border-box',
+  },
+
+  leftSection: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    flex: 1,
+    minWidth: 0,
+  },
+
+  rightSection: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    flexShrink: 0,
+    marginLeft: '16px',
+  },
+
+  icon: {
+    fontSize: '16px',
+    flexShrink: 0,
+  },
+
+  accordionTitle: {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    fontFamily: 'Dosvgabold',
+  },
+
+  durationText: {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    fontFamily: 'Dosvgabold',
+    whiteSpace: 'nowrap',
+  },
+
+  separator: {
+    fontSize: '11px',
+    color: '#000000',
+  },
+
+  locationText: {
+    fontSize: '14px',
+    fontStyle: 'italic',
+    fontFamily: 'Dosvgabold',
+    whiteSpace: 'nowrap',
+  },
+
+  expandIcon: {
+    fontSize: '10px',
+    fontWeight: 'bold',
+    marginLeft: '8px',
+    flexShrink: 0,
+  },
+
+  accordionContent: {
+    padding: '12px 16px',
+    backgroundColor: '#FFFFFF',
+    borderTop: '2px solid #808080',
+    fontFamily: 'Dosvgabold',
+    fontSize: '11px',
+    lineHeight: '1',
+    width: '100%',
+    boxSizing: 'border-box',
+  },
+
+  achievementsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: '11px',
+    fontFamily: 'Dosvgabold',
+    lineHeight: '1',
+  },
+
+  achievementText: {
+    fontSize: '14px',
+    color: '#000000',
+    fontFamily: 'Dosvgabold',
+  },
+
+  placeholderSpace: {
+    width: '100%',
+    height: '150px',
+    backgroundColor: '#FFFFFF',
+    flexShrink: 0,
+  },
 };
+
+interface StyleSheetCSS {
+  [key: string]: React.CSSProperties;
+}
 
 export default Experience;

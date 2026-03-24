@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import software from '../../assets/pictures/projects/software.gif';
 import art from '../../assets/pictures/projects/art.gif';
 import music from '../../assets/pictures/projects/music.gif';
+import coin from '../../assets/pictures/projects/coin.gif';
+import achievement from '../../assets/pictures/projects/pixel-art-achievement.gif';
+import project from '../../assets/pictures/projects/pixel-art-project.gif';
+import interest from '../../assets/pictures/projects/pixel-art-interest.gif';
+import "xp.css/dist/XP.css";
+import PathNavBar from './PathNavBar';
 
 export interface ProjectsProps {}
 
-interface ProjectBoxProps {
+interface ProjectContentProps {
     icon: string;
     title: string;
     subtitle: string;
@@ -14,141 +20,237 @@ interface ProjectBoxProps {
     iconStyle: React.CSSProperties;
 }
 
-const ProjectBox: React.FC<ProjectBoxProps> = ({
+const ProjectContent: React.FC<ProjectContentProps> = ({
     icon,
     title,
     subtitle,
     route,
     iconStyle,
 }) => {
-    const [, setIsHovering] = useState(false);
     const navigation = useNavigate();
 
     const handleClick = () => {
         navigation(`/projects/${route}`);
     };
 
-    const onMouseEnter = () => {
-        setIsHovering(true);
-    };
-
-    const onMouseLeave = () => {
-        setIsHovering(false);
-    };
-
     return (
-        <div
-            onMouseDown={handleClick}
-            className="big-button-container"
-            style={styles.projectLink}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-        >
-            <div style={styles.projectLinkLeft}>
+        <div style={styles.tabContent}>
+            <div style={styles.projectDisplay}>
                 <img
                     src={icon}
                     style={Object.assign(
                         {},
-                        styles.projectLinkImage,
+                        styles.projectIcon,
                         iconStyle
                     )}
-                    alt=""
+                    alt={title}
                 />
-                <div style={styles.projectText}>
-                    <h1 style={{ fontSize: 48 }}>{title}</h1>
-                    <h3>{subtitle}</h3>
+                <div style={styles.projectInfo}>
+                    <h2 style={styles.projectTitle}>{title}</h2>
+                    <h4 style={styles.projectSubtitle}>{subtitle}</h4>
+                    <button 
+                        onClick={handleClick}
+                        style={styles.viewButton}
+                    >
+                        View {title} 
+                    </button>
                 </div>
             </div>
-            <div style={styles.projectLinkRight}></div>
+            <p style={styles.description}>
+                Click the button to explore my software projects, achievements and other interests.
+            </p>
         </div>
     );
 };
 
 const Projects: React.FC<ProjectsProps> = (props) => {
+    const [activeTab, setActiveTab] = useState<'software' | 'achievements' | 'art'>('software');
+
+    const handleTabClick = (tab: 'software' | 'achievements' | 'art') => {
+        setActiveTab(tab);
+    };
+
     return (
-        <div className="site-page-content">
-            <h1>Projects</h1>
-            <h3>& Hobbies</h3>
-            <br />
-            <p>
-                Click on one of the areas below to check out some of my favorite
-                projects I've done in that field. I spent a lot of time to
-                include a lot of visuals and interactive media to showcase each
-                project. Enjoy!
-            </p>
-            <br />
-            <div style={styles.projectLinksContainer}>
-                <ProjectBox
-                    icon={software}
-                    iconStyle={styles.computerIcon}
-                    title="Software"
-                    subtitle="PROJECTS"
-                    route="software"
-                />
-                <ProjectBox
-                    icon={music}
-                    iconStyle={styles.musicIcon}
-                    title="Music"
-                    subtitle="VENTURES"
-                    route="music"
-                />
-                <ProjectBox
-                    icon={art}
-                    iconStyle={styles.artIcon}
-                    title="Art"
-                    subtitle="ENDEAVORS"
-                    route="art"
-                />
+        <div style={styles.projectsContainer}>
+            
+                {/* Path Nav Bar - Fixed at top */}
+                <div style={styles.navBarContainer}>
+                    <PathNavBar currentDirectory='Projects' />
+                </div>
+
+            <div style={styles.contentContainer}>
+                
+                <h1 style={styles.titleText}>Projects and Interests</h1>
+                <br />
+                <p style={styles.descText}>
+                    Please check out some of my personal projects I have done in the software engineering field and my general interests. 
+                </p>
+                <br />
+                
+                <section className="tabs" style={styles.tabsContainer}>
+                    <menu role="tablist" aria-label="Project Categories">
+                        <button 
+                            role="tab" 
+                            aria-selected={activeTab === 'software'}
+                            aria-controls="tab-software"
+                            onClick={() => handleTabClick('software')}
+                        >
+                            Software
+                        </button>
+                        <button 
+                            role="tab" 
+                            aria-selected={activeTab === 'achievements'}
+                            aria-controls="tab-achievements"
+                            onClick={() => handleTabClick('achievements')}
+                        >
+                            Achievements
+                        </button>
+                        <button 
+                            role="tab" 
+                            aria-selected={activeTab === 'art'}
+                            aria-controls="tab-art"
+                            onClick={() => handleTabClick('art')}
+                        >
+                            Interests
+                        </button>
+                    </menu>
+
+                    <article 
+                        role="tabpanel" 
+                        id="tab-software"
+                        hidden={activeTab !== 'software'}
+                    >
+                        <ProjectContent
+                            icon={project}
+                            iconStyle={styles.projectsIcon}
+                            title="Software Projects"
+                            subtitle=""
+                            route="software"
+                        />
+                    </article>
+
+                    <article 
+                        role="tabpanel" 
+                        id="tab-achievements"
+                        hidden={activeTab !== 'achievements'}
+                    >
+                        <ProjectContent
+                            icon={achievement}
+                            iconStyle={styles.achievementsIcon}
+                            title="Achievements"
+                            subtitle=""
+                            route="achievements"
+                        />
+                    </article>
+
+                    <article 
+                        role="tabpanel" 
+                        id="tab-art"
+                        hidden={activeTab !== 'art'}
+                    >
+                        <ProjectContent
+                            icon={interest}
+                            iconStyle={styles.interestIcon}
+                            title="Interests"
+                            subtitle=""
+                            route="art"
+                        />
+                    </article>
+                </section>
             </div>
         </div>
     );
 };
 
 const styles: StyleSheetCSS = {
-    projectLinksContainer: {
-        flexDirection: 'column',
+    tabsContainer: {
         width: '100%',
+        maxWidth: '800px',
+    },
+    projectsContainer: {
+        width: '100%',
+        backgroundColor: '#FFFFFF',
+        fontFamily: 'MS Sans Serif, Tahoma, Arial, sans-serif',
+        fontSize: '11px',
+        marginLeft: '200px',
+        paddingLeft: '16px',
+        boxSizing: 'border-box',
         display: 'flex',
+        flexDirection: 'column',
+    // removed height: '100vh' and overflow: 'hidden' ✅
+    },
+    contentContainer: {
+        marginLeft: '100px',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    descText: {
+        fontSize: '1.5em',
+        color: '#000000',
+        margin: '0 0 16px 0',
+        textAlign: 'justify',
+        fontFamily: 'Dosvgabold',
+        lineHeight: '1.5',
+        wordWrap: 'break-word',
+    },
+    titleText: {
+        fontSize: '3em',
+        fontWeight: 'bold',
+        marginTop: '2em',
+        color: '#000080',
+        fontFamily: 'Dosvgabold',
         flex: 1,
     },
-    projectLink: {
-        marginBottom: 24,
-        cursor: 'pointer',
-        width: '100%',
-        boxSizing: 'border-box',
-
-        alignItems: 'center',
-        justifyContent: 'space-between',
+    tabContent: {
+        padding: '20px',
     },
-    projectText: {
-        justifyContent: 'center',
+    projectDisplay: {
+        display: 'flex',
+        alignItems: 'center',
+        marginBottom: '20px',
+    },
+    projectIcon: {
+        marginRight: '30px',
+    },
+    projectInfo: {
+        display: 'flex',
         flexDirection: 'column',
     },
-    projectLinkImage: {
-        width: 48,
-        // height: 48,
-        marginRight: 38,
+    projectTitle: {
+        fontSize: '32px',
+        margin: '0 0 8px 0',
     },
-    projectLinkLeft: {
-        marginLeft: 16,
-        alignItems: 'center',
+    projectSubtitle: {
+        fontSize: '16px',
+        margin: '0 0 16px 0',
+        color: '#666',
     },
-    computerIcon: {
-        width: 56,
-        height: 56,
+    viewButton: {
+        width: 'fit-content',
+        padding: '8px 16px',
+        cursor: 'pointer',
     },
-    musicIcon: {
-        width: 48,
-        height: 48,
+    description: {
+        marginLeft: '1em',
+        marginTop: '16px',
+        lineHeight: '1.6',
     },
-    arrowIcon: {
-        width: 48,
-        height: 48,
+    projectsIcon: {
+        width: 120,
+        height: 120,
     },
-    artIcon: {
-        width: 21 * 2,
-        height: 37 * 2,
+    achievementsIcon: {
+        width: 120,
+        height: 120,
     },
+    interestIcon: {
+        width: 120,
+        height: 120,
+    },
+    navBarContainer: {
+    flexShrink: 0,
+    width: '100%',
+  },
 };
 
 export default Projects;

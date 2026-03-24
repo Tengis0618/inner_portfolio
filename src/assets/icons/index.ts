@@ -5,7 +5,7 @@ import maximize from './maximize.png';
 import minimize from './minimize.png';
 import computerBig from './computerBig.png';
 import computerSmall from './computerSmall.png';
-import myComputer from './myComputer.png';
+//import myComputer from './myComputer.png';
 import showcaseIcon from './showcaseIcon.png';
 import doomIcon from './doomIcon.png';
 import henordleIcon from './henordleIcon.png';
@@ -18,6 +18,12 @@ import windowExplorerIcon from './windowExplorerIcon.png';
 import windowsStartIcon from './windowsStartIcon.png';
 import scrabbleIcon from './scrabbleIcon.png';
 import close from './close.png';
+import Documents from './Documents.ico';
+import emptyRecycleBin from './emptyRecycleBin.ico';
+import myComputer from './myComputer.ico';
+import fullRecycleBin from './fullRecycleBin.ico';
+import Network from './Network.ico';
+import openFolder from './windows-xp-folder/Open Folder.ico';
 
 const icons = {
     windowResize: windowResize,
@@ -38,6 +44,11 @@ const icons = {
     windowExplorerIcon: windowExplorerIcon,
     windowsStartIcon: windowsStartIcon,
     trailIcon: trailIcon,
+    Documents: Documents,
+    emptyRecycleBin: emptyRecycleBin,
+    fullRecycleBin: fullRecycleBin,
+    Network: Network,
+    openFolder: openFolder,
 };
 
 export type IconName = keyof typeof icons;

@@ -23,7 +23,7 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
 
     const [scaledStyle, setScaledStyle] = useState({});
 
-    const requiredIcon = require(`../../assets/icons/${icon}.png`);
+    const requiredIcon = require(`../../assets/icons/${icon}.ico`);
     const [doubleClickTimerActive, setDoubleClickTimerActive] = useState(false);
 
     const getShortcutId = useCallback(() => {

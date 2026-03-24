@@ -1,73 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Window from '../os/Window';
-import { useInterval } from 'usehooks-ts';
 import { motion } from 'framer-motion';
 
 export interface CreditsProps extends WindowAppProps {}
 
 const CREDITS = [
     {
-        title: 'Engineering & Design',
-        rows: [['Henry Heffernan', 'All']],
+        title: 'Design & Development',
+        rows: [['Tengis Temuulen', 'All']],
     },
     {
-        title: 'Modeling & Texturing',
+        title: 'Modeling & Base',
         rows: [
-            ['Henry Heffernan', 'Texturing, Composition, & UV'],
-            ['Mickael Boitte', 'Computer Model'],
-            ['Sean Nicolas', 'Environment Models'],
+            ['Henry Heffernan', 'Portfolio'],
         ],
     },
     {
         title: 'Sound Design',
         rows: [
-            ['Henry Heffernan', 'Mixing, Composition, & Foley'],
-            ['Sound Cassette', 'Office Ambience'],
             ['Windows 95 Startup Sound', 'Microsoft'],
         ],
     },
     {
         title: 'Special Thanks',
         rows: [
-            ['Bruno Simon', 'SimonDev'],
-            ['Lorelei Kravinsky', 'Scott Bass'],
-            ['Trey Briccetti', 'Mom, Dad & Angela'],
-        ],
+            ['Family', 'Friends']],
     },
     {
         title: 'Inspiration',
         rows: [
-            ['Bruno Simon', 'Jesse Zhou'],
-            ['Pink Yellow', 'Vivek Patel'],
-        ],
+            ['Henry Heffernan', 'ShizukuIchi']],
+    },
+    {
+        title: '',
+        rows: [['', '']],
+    },
+    {
+        title: '',
+        rows: [['', '']],
+    },
+    {
+        title: '',
+        rows: [['', '']],
+    },
+    {
+        title: 'Thank You',
+        rows: [['For Visiting', '']],
+    },
+    {
+        title: '',
+        rows: [['', '']],
     },
 ];
 
 const Credits: React.FC<CreditsProps> = (props) => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [time, setTime] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    // every 5 seconds, move to the next slide
-    useInterval(() => {
-        setTime(time + 1);
-        // setCurrentSlide((currentSlide + 1) % CREDITS.length);
-    }, 1000);
-
-    useEffect(() => {
-        if (time > 5) {
-            setCurrentSlide((currentSlide + 1) % CREDITS.length);
-            setTime(0);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [time]);
-
-    const nextSlide = () => {
-        setTime(0);
-        setCurrentSlide((currentSlide + 1) % CREDITS.length);
+    const handleClick = () => {
+        setIsPaused(!isPaused);
     };
 
     return (
-        // add on resize listener
         <Window
             top={48}
             left={48}
@@ -78,52 +72,50 @@ const Credits: React.FC<CreditsProps> = (props) => {
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
-            bottomLeftText={'© Copyright 2022 Henry Heffernan'}
+            bottomLeftText={'© Copyright 2026 Tengis Temuulen'}
         >
             <div
-                onMouseDown={nextSlide}
+                onClick={handleClick}
                 className="site-page"
                 style={styles.credits}
+                ref={containerRef}
             >
-                <h2>Credits</h2>
-                <p>henryheffernan.com, 2022</p>
-                <br />
-                <br />
-                <br />
-                <div style={styles.slideContainer}>
-                    {
-                        <motion.div
-                            animate={{ opacity: 1, y: -20 }}
-                            transition={{ duration: 0.5 }}
-                            key={`section-${CREDITS[currentSlide].title}`}
-                            style={styles.section}
-                        >
-                            <h3 style={styles.sectionTitle}>
-                                {CREDITS[currentSlide].title}
-                            </h3>
-                            {CREDITS[currentSlide].rows.map((row, i) => {
-                                return (
-                                    <div key={`row-${i}`} style={styles.row}>
-                                        <p>{row[0]}</p>
-                                        <p>{row[1]}</p>
+                <h2 style={styles.header}>Credits</h2>
+                <p style={styles.subheader}>Tengis Temuulen, 2026</p>
+                
+                <div style={styles.scrollContainer}>
+                    <motion.div
+                        style={styles.creditsContainer}
+                        animate={{
+                            y: isPaused ? 0 : [0, -2000],
+                        }}
+                        transition={{
+                            duration: isPaused ? 0 : 30,
+                            repeat: Infinity,
+                            ease: "linear",
+                            repeatType: "loop",
+                        }}
+                    >
+                        {/* Render credits twice for seamless loop */}
+                        {[...CREDITS, ...CREDITS].map((section, sectionIndex) => (
+                            <div key={`section-${sectionIndex}`} style={styles.section}>
+                                {section.title && (
+                                    <h3 style={styles.sectionTitle}>{section.title}</h3>
+                                )}
+                                {section.rows.map((row, rowIndex) => (
+                                    <div key={`row-${sectionIndex}-${rowIndex}`} style={styles.row}>
+                                        <p style={styles.name}>{row[0]}</p>
+                                        {row[1] && <p style={styles.role}>{row[1]}</p>}
                                     </div>
-                                );
-                            })}
-                        </motion.div>
-                    }
-                </div>
-                <p>Click to continue...</p>
-                <br />
-                <div style={styles.nextSlideTimer}>
-                    {/* make a time number of dots */}
-                    {Array.from(Array(time)).map((i) => {
-                        return (
-                            <div key={i}>
-                                <p>.</p>
+                                ))}
                             </div>
-                        );
-                    })}
+                        ))}
+                    </motion.div>
                 </div>
+                
+                <p style={styles.instruction}>
+                    {isPaused ? 'Click to resume...' : 'Click to pause...'}
+                </p>
             </div>
         </Window>
     );
@@ -132,43 +124,83 @@ const Credits: React.FC<CreditsProps> = (props) => {
 const styles: StyleSheetCSS = {
     credits: {
         width: '100%',
+        height: '100%',
         backgroundColor: 'black',
-        paddingTop: 64,
         flexDirection: 'column',
         alignItems: 'center',
-        paddingBottom: 64,
         color: 'white',
         overflow: 'hidden',
+        position: 'relative',
+        cursor: 'pointer',
+        padding: '32px 0',
+        boxSizing: 'border-box',
     },
-    row: {
-        overflow: 'none',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        width: 600,
-        alignSelf: 'center',
+    header: {
+        margin: '16px 0 8px 0',
+        fontSize: '32px',
+        fontWeight: 'bold',
+    },
+    subheader: {
+        margin: '0 0 32px 0',
+        fontSize: '16px',
+        opacity: 0.8,
+    },
+    scrollContainer: {
+        flex: 1,
+        width: '100%',
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    creditsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: '100px', // Changed from '100%' to '50px'
+        gap: '64px',
     },
     section: {
-        overflow: 'none',
-        alignItems: 'center',
+        display: 'flex',
         flexDirection: 'column',
-        marginBottom: 32,
-        opacity: 0,
+        alignItems: 'center',
+        marginBottom: '48px',
+        minHeight: '100px',
     },
     sectionTitle: {
-        marginBottom: 32,
+        fontSize: '24px',
+        fontWeight: 'bold',
+        marginBottom: '24px',
+        textTransform: 'uppercase',
+        letterSpacing: '2px',
+        color: '#FFD700',
     },
-    slideContainer: {
-        width: '100%',
-        height: '70%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer',
+    row: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        width: '600px',
+        margin: '8px 0',
+        gap: '32px',
     },
-    nextSlideTimer: {
-        width: 64,
-        height: 32,
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
+    name: {
+        fontSize: '18px',
+        flex: 1,
+        textAlign: 'right',
+    },
+    role: {
+        fontSize: '18px',
+        flex: 1,
+        textAlign: 'left',
+        opacity: 0.7,
+    },
+    instruction: {
+        position: 'absolute',
+        bottom: '16px',
+        fontSize: '14px',
+        opacity: 0.5,
+        animation: 'pulse 2s infinite',
     },
 };
 

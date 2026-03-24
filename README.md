@@ -67,8 +67,8 @@ src/
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/windows-xp-portfolio.git
-cd windows-xp-portfolio
+git clone https://github.com/Tengis0618/inner_portfolio.git
+cd inner_portfolio
 npm install
 ```
 

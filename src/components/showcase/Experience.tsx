@@ -27,13 +27,7 @@ const Experience: React.FC<ExperienceProps> = () => {
       description: 'Developed full-stack web applications and collaborated with the tech team to optimize internal workflows.',
       achievements: [
         'Contributed to integrating Google Pay, Apple Pay, and Samsung Pay wallet payment and card provisioning capabilities, enabling secure digital payment experiences across multiple platforms',
-<<<<<<< HEAD
         'Maintained and improved a mobile fintech application serving 50,000+ daily active users, focusing on reliability, performance optimization, and seamless user experience',
-=======
-
-        'Maintained and improved a mobile fintech application serving 50,000+ daily active users, focusing on reliability, performance optimization, and seamless user experience',
-
->>>>>>> 19e824b (fix: change experience description)
         'Developed backend services and deployment workflows using Kubernetes-based infrastructure, implementing CI/CD pipelines and monitoring solutions with ArgoCD and Grafana'
       ]
     },

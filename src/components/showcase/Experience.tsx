@@ -26,9 +26,11 @@ const Experience: React.FC<ExperienceProps> = () => {
       location: 'Ulaanbaatar, Mongolia',
       description: 'Developed full-stack web applications and collaborated with the tech team to optimize internal workflows.',
       achievements: [
-        'Developed and maintained a mobile banking application serving 10,000+ daily active users, ensuring high availability and performance under peak load conditions',
-        'Built robust backend services using Java Spring Boot framework, implementing secure APIs for financial transactions and account management features',
-        'Managed and deployed applications to UAT Kubernetes clusters, optimizing container orchestration and implementing CI/CD pipelines for seamless development workflows'
+        'Contributed to integrating Google Pay, Apple Pay, and Samsung Pay wallet payment and card provisioning capabilities, enabling secure digital payment experiences across multiple platforms',
+
+        'Maintained and improved a mobile fintech application serving 50,000+ daily active users, focusing on reliability, performance optimization, and seamless user experience',
+
+        'Developed backend services and deployment workflows using Kubernetes-based infrastructure, implementing CI/CD pipelines and monitoring solutions with ArgoCD and Grafana'
       ]
     },
     {
